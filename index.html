@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Cardápio Digital</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffd6e7,#d9f0ff);
+    font-family:'Poppins', sans-serif;
+}
+
+/* animação de abrir */
+@keyframes abrirCardapio{
+    0%{
+        transform:scaleY(0) scaleX(0.7);
+        opacity:0;
+    }
+    60%{
+        transform:scaleY(1.1) scaleX(1);
+    }
+    100%{
+        transform:scaleY(1) scaleX(1);
+        opacity:1;
+    }
+}
+
+.cardapio{
+    background:white;
+    width:340px;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+    text-align:center;
+    border:3px solid #ff9acb;
+    animation:abrirCardapio 0.8s ease forwards;
+    transform-origin:top;
+}
+
+h1{
+    margin:0;
+    font-size:26px;
+    color:#ff4da6;
+}
+
+.sub{
+    margin-top:5px;
+    margin-bottom:20px;
+    color:#555;
+    font-weight:500;
+}
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    padding:10px;
+    margin:8px 0;
+    border-radius:12px;
+    background:#fff0f7;
+    transition:0.2s;
+}
+
+.item:hover{
+    transform:scale(1.05);
+    background:#ffe3f1;
+}
+
+.nome{
+    font-weight:500;
+}
+
+.preco{
+    font-weight:700;
+    color:#ff4da6;
+}
+
+.rodape{
+    margin-top:20px;
+    font-size:12px;
+    color:#888;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="cardapio">
+
+<h1>CARDÁPIO DIGITAL</h1>
+<div class="sub">Restaurante Sigma</div>
+
+<div class="item">
+<span class="nome">Comida fofinha</span>
+<span class="preco">R$12,99</span>
+</div>
+
+<div class="item">
+<span class="nome">Comida cute cute</span>
+<span class="preco">R$19,99</span>
+</div>
+
+<div class="item">
+<span class="nome">Tralalero tralala frito</span>
+<span class="preco">R$29,99</span>
+</div>
+
+<div class="item">
+<span class="nome">Picanha cozida (kg)</span>
+<span class="preco">R$99,99</span>
+</div>
+
+<div class="rodape">feito por Maisa dev suprema</div>
+
+</div>
+
+</body>
+</html>
