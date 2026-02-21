@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cardápio Digital</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
@@ -10,7 +11,7 @@
 
 body{
     margin:0;
-    height:100vh;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -21,24 +22,25 @@ body{
 /* animação de abrir */
 @keyframes abrirCardapio{
     0%{
-        transform:scaleY(0) scaleX(0.7);
+        transform:scaleY(0) scaleX(0.9);
         opacity:0;
     }
     60%{
-        transform:scaleY(1.1) scaleX(1);
+        transform:scaleY(1.05) scaleX(1);
     }
     100%{
-        transform:scaleY(1) scaleX(1);
+        transform:scaleY(1);
         opacity:1;
     }
 }
 
 .cardapio{
     background:white;
-    width:340px;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+    width:90%;
+    max-width:380px;
+    padding:28px;
+    border-radius:22px;
+    box-shadow:0 18px 45px rgba(0,0,0,0.25);
     text-align:center;
     border:3px solid #ff9acb;
     animation:abrirCardapio 0.8s ease forwards;
@@ -47,45 +49,56 @@ body{
 
 h1{
     margin:0;
-    font-size:26px;
+    font-size:clamp(24px, 6vw, 30px);
     color:#ff4da6;
 }
 
 .sub{
-    margin-top:5px;
-    margin-bottom:20px;
+    margin-top:6px;
+    margin-bottom:22px;
     color:#555;
     font-weight:500;
+    font-size:clamp(14px, 4vw, 16px);
 }
 
 .item{
     display:flex;
     justify-content:space-between;
-    padding:10px;
-    margin:8px 0;
-    border-radius:12px;
+    align-items:center;
+    padding:14px;
+    margin:10px 0;
+    border-radius:14px;
     background:#fff0f7;
-    transition:0.2s;
-}
-
-.item:hover{
-    transform:scale(1.05);
-    background:#ffe3f1;
 }
 
 .nome{
     font-weight:500;
+    font-size:clamp(14px, 4vw, 16px);
 }
 
 .preco{
     font-weight:700;
+    font-size:clamp(14px, 4vw, 16px);
     color:#ff4da6;
 }
 
+/* toque mobile */
+.item:active{
+    background:#ffe3f1;
+    transform:scale(0.98);
+}
+
 .rodape{
-    margin-top:20px;
+    margin-top:22px;
     font-size:12px;
     color:#888;
+}
+
+/* ajustes extras p telas muito pequenas */
+@media (max-width:360px){
+    .cardapio{
+        padding:22px;
+    }
 }
 
 </style>
