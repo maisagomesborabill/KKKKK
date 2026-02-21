@@ -1,14 +1,13 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardápio Digital</title>
+<title>Cardápio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-
 body{
     margin:0;
     min-height:100vh;
@@ -19,88 +18,83 @@ body{
     font-family:'Poppins', sans-serif;
 }
 
-/* animação de abrir */
-@keyframes abrirCardapio{
-    0%{
-        transform:scaleY(0) scaleX(0.9);
-        opacity:0;
-    }
-    60%{
-        transform:scaleY(1.05) scaleX(1);
-    }
-    100%{
-        transform:scaleY(1);
-        opacity:1;
-    }
-}
-
 .cardapio{
     background:white;
     width:90%;
-    max-width:380px;
-    padding:28px;
+    max-width:400px;
+    padding:25px;
     border-radius:22px;
     box-shadow:0 18px 45px rgba(0,0,0,0.25);
     text-align:center;
     border:3px solid #ff9acb;
-    animation:abrirCardapio 0.8s ease forwards;
-    transform-origin:top;
+    animation:abrir 0.7s ease;
+}
+
+@keyframes abrir{
+    from{transform:scale(0.8);opacity:0;}
+    to{transform:scale(1);opacity:1;}
 }
 
 h1{
     margin:0;
-    font-size:clamp(24px, 6vw, 30px);
     color:#ff4da6;
 }
 
 .sub{
-    margin-top:6px;
-    margin-bottom:22px;
+    margin-bottom:20px;
     color:#555;
-    font-weight:500;
-    font-size:clamp(14px, 4vw, 16px);
 }
 
 .item{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:14px;
-    margin:10px 0;
-    border-radius:14px;
     background:#fff0f7;
+    padding:12px;
+    margin:8px 0;
+    border-radius:14px;
 }
 
-.nome{
-    font-weight:500;
-    font-size:clamp(14px, 4vw, 16px);
+label{
+    flex:1;
+    text-align:left;
+    cursor:pointer;
 }
 
 .preco{
-    font-weight:700;
-    font-size:clamp(14px, 4vw, 16px);
+    font-weight:bold;
+    margin-right:10px;
     color:#ff4da6;
 }
 
-/* toque mobile */
-.item:active{
-    background:#ffe3f1;
-    transform:scale(0.98);
+input{
+    transform:scale(1.2);
+    cursor:pointer;
 }
 
-.rodape{
-    margin-top:22px;
-    font-size:12px;
-    color:#888;
+.total{
+    margin-top:20px;
+    font-size:18px;
+    font-weight:bold;
 }
 
-/* ajustes extras p telas muito pequenas */
-@media (max-width:360px){
-    .cardapio{
-        padding:22px;
-    }
+button{
+    margin-top:15px;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:bold;
+    background:#ff4da6;
+    color:white;
+    cursor:pointer;
+    transition:.2s;
 }
 
+button:hover{
+    background:#ff2d96;
+}
 </style>
 </head>
 
@@ -108,32 +102,63 @@ h1{
 
 <div class="cardapio">
 
-<h1>CARDÁPIO DIGITAL</h1>
+<h1>CARDÁPIO</h1>
 <div class="sub">Restaurante Sigma</div>
 
 <div class="item">
-<span class="nome">Comida fofinha</span>
-<span class="preco">R$12,99</span>
+<label>Comida fofinha</label>
+<span class="preco">12.99</span>
+<input type="checkbox" value="12.99" onchange="calc()">
 </div>
 
 <div class="item">
-<span class="nome">Comida cute cute</span>
-<span class="preco">R$19,99</span>
+<label>Comida cute cute</label>
+<span class="preco">19.99</span>
+<input type="checkbox" value="19.99" onchange="calc()">
 </div>
 
 <div class="item">
-<span class="nome">Tralalero tralala frito</span>
-<span class="preco">R$29,99</span>
+<label>Tralalero tralala frito</label>
+<span class="preco">29.99</span>
+<input type="checkbox" value="29.99" onchange="calc()">
 </div>
 
 <div class="item">
-<span class="nome">Picanha cozida (kg)</span>
-<span class="preco">R$99,99</span>
+<label>Picanha cozida (kg)</label>
+<span class="preco">99.99</span>
+<input type="checkbox" value="99.99" onchange="calc()">
 </div>
 
-<div class="rodape">feito por Maisa dev suprema</div>
+<div class="total">
+Total: R$ <span id="total">0.00</span>
+</div>
+
+<button onclick="pedir()">Pedir</button>
 
 </div>
+
+<script>
+function calc(){
+    let total = 0;
+    document.querySelectorAll("input:checked").forEach(e=>{
+        total += parseFloat(e.value);
+    });
+    document.getElementById("total").innerText = total.toFixed(2);
+}
+
+function pedir(){
+    let itens = [];
+    document.querySelectorAll("input:checked").forEach(e=>{
+        itens.push(e.parentElement.innerText.trim());
+    });
+
+    if(itens.length===0){
+        alert("Escolha algo primeiro 😡");
+    }else{
+        alert("Pedido feito:\n\n"+itens.join("\n"));
+    }
+}
+</script>
 
 </body>
-</html>
+                                   </html>
