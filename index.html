@@ -5,188 +5,158 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cardápio</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
 body{
     margin:0;
-    height:100vh;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(135deg,#ffd1e6,#c9e7ff);
-    font-family: 'Segoe UI', sans-serif;
+    background:linear-gradient(135deg,#ffd6e7,#d9f0ff);
+    font-family:'Poppins', sans-serif;
 }
 
 .cardapio{
     background:white;
     width:90%;
-    max-width:360px;
+    max-width:400px;
     padding:25px;
-    border-radius:20px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+    border-radius:22px;
+    box-shadow:0 18px 45px rgba(0,0,0,0.25);
     text-align:center;
     border:3px solid #ff9acb;
-    animation:abrir .7s ease;
+    animation:abrir 0.7s ease;
 }
 
 @keyframes abrir{
-    from{transform:scale(.6);opacity:0}
-    to{transform:scale(1);opacity:1}
+    from{transform:scale(0.8);opacity:0;}
+    to{transform:scale(1);opacity:1;}
 }
 
 h1{
-    color:#ff4fa3;
     margin:0;
+    color:#ff4da6;
 }
 
-h2{
-    margin-top:5px;
-    color:#666;
-    font-weight:normal;
+.sub{
+    margin-bottom:20px;
+    color:#555;
 }
 
 .item{
-    background:#ffeaf4;
-    margin:12px 0;
-    padding:12px;
-    border-radius:15px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    background:#fff0f7;
+    padding:12px;
+    margin:8px 0;
+    border-radius:14px;
 }
 
-.item button{
-    border:none;
-    background:#ff7ab6;
-    color:white;
-    font-size:18px;
-    width:30px;
-    height:30px;
-    border-radius:8px;
+label{
+    flex:1;
+    text-align:left;
+    cursor:pointer;
 }
 
-.qtd{
-    margin:0 8px;
+.preco{
     font-weight:bold;
-}
-
-.total{
-    margin-top:15px;
-    font-size:20px;
-    font-weight:bold;
+    margin-right:10px;
+    color:#ff4da6;
 }
 
 input{
-    width:80%;
-    padding:8px;
-    border-radius:10px;
-    border:2px solid #ff9acb;
-    text-align:center;
-    margin-top:10px;
+    transform:scale(1.2);
+    cursor:pointer;
 }
 
-.pedir{
+.total{
+    margin-top:20px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+button{
     margin-top:15px;
-    background:#25d366;
-    color:white;
+    width:100%;
+    padding:14px;
     border:none;
-    padding:12px 20px;
+    border-radius:14px;
     font-size:16px;
-    border-radius:12px;
+    font-weight:bold;
+    background:#ff4da6;
+    color:white;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    background:#ff2d96;
 }
 </style>
 </head>
+
 <body>
 
 <div class="cardapio">
 
 <h1>CARDÁPIO</h1>
-<h2>Restaurante Sigma</h2>
-
-<input id="mesa" placeholder="Número da mesa">
+<div class="sub">Restaurante Sigma</div>
 
 <div class="item">
-<span>Comida fofinha</span>
-<div>
-<button onclick="alt(0,-1)">−</button>
-<span class="qtd" id="q0">0</span>
-<button onclick="alt(0,1)">+</button>
-</div>
+<label>Comida fofinha</label>
+<span class="preco">12.99</span>
+<input type="checkbox" value="12.99" onchange="calc()">
 </div>
 
 <div class="item">
-<span>Comida cute cute</span>
-<div>
-<button onclick="alt(1,-1)">−</button>
-<span class="qtd" id="q1">0</span>
-<button onclick="alt(1,1)">+</button>
-</div>
+<label>Comida cute cute</label>
+<span class="preco">19.99</span>
+<input type="checkbox" value="19.99" onchange="calc()">
 </div>
 
 <div class="item">
-<span>Tralalero frito</span>
-<div>
-<button onclick="alt(2,-1)">−</button>
-<span class="qtd" id="q2">0</span>
-<button onclick="alt(2,1)">+</button>
-</div>
+<label>Tralalero tralala frito</label>
+<span class="preco">29.99</span>
+<input type="checkbox" value="29.99" onchange="calc()">
 </div>
 
 <div class="item">
-<span>Picanha (kg)</span>
-<div>
-<button onclick="alt(3,-1)">−</button>
-<span class="qtd" id="q3">0</span>
-<button onclick="alt(3,1)">+</button>
-</div>
+<label>Picanha cozida (kg)</label>
+<span class="preco">99.99</span>
+<input type="checkbox" value="99.99" onchange="calc()">
 </div>
 
 <div class="total">
 Total: R$ <span id="total">0.00</span>
 </div>
 
-<button class="pedir" onclick="pedir()">Pedir no WhatsApp</button>
+<button onclick="pedir()">Pedir</button>
 
 </div>
 
 <script>
-let precos=[12.99,19.99,29.99,99.99]
-let qtd=[0,0,0,0]
-
-function alt(i,v){
-    qtd[i]+=v
-    if(qtd[i]<0)qtd[i]=0
-    document.getElementById("q"+i).innerText=qtd[i]
-    calcular()
-}
-
-function calcular(){
-    let t=0
-    for(let i=0;i<precos.length;i++)
-        t+=precos[i]*qtd[i]
-    document.getElementById("total").innerText=t.toFixed(2)
+function calc(){
+    let total = 0;
+    document.querySelectorAll("input:checked").forEach(e=>{
+        total += parseFloat(e.value);
+    });
+    document.getElementById("total").innerText = total.toFixed(2);
 }
 
 function pedir(){
-    let mesa=document.getElementById("mesa").value
-    if(!mesa) return alert("digite o número da mesa")
+    let itens = [];
+    document.querySelectorAll("input:checked").forEach(e=>{
+        itens.push(e.parentElement.innerText.trim());
+    });
 
-    let msg=`Pedido - Mesa ${mesa}%0A`
-
-    let nomes=[
-    "Comida fofinha",
-    "Comida cute cute",
-    "Tralalero frito",
-    "Picanha"
-    ]
-
-    for(let i=0;i<qtd.length;i++){
-        if(qtd[i]>0)
-        msg+=`${nomes[i]} x${qtd[i]}%0A`
+    if(itens.length===0){
+        alert("Escolha algo primeiro 😡");
+    }else{
+        alert("Pedido feito:\n\n"+itens.join("\n"));
     }
-
-    msg+=`Total: R$ ${document.getElementById("total").innerText}`
-
-    window.open(`https://wa.me/554799513861?text=${msg}`)
 }
 </script>
 
